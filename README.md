@@ -14,5 +14,6 @@ Your first steps should be to get your team set up with this code, ensure you ca
 Enjoy!
 Dr. Gary
 Edit: Anthony edited this.
-edit: micah did this.
+Edit: micah did this.
 Edit: Jack edited this.
+Edit: Connor was here.
