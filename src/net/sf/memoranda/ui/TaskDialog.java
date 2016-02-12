@@ -69,7 +69,7 @@ public class TaskDialog extends JDialog {
     Border border8;
     CalendarFrame startCalFrame = new CalendarFrame();
     CalendarFrame endCalFrame = new CalendarFrame();
-    String[] priority = {Local.getString("Lowest"), Local.getString("Low"),
+    String[] priority = {Local.getString("Lowiest Of Lows"), Local.getString("Low"),
         Local.getString("Normal"), Local.getString("High"),
         Local.getString("Highest")};
     boolean ignoreStartChanged = false;

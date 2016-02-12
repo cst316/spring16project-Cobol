@@ -51,6 +51,7 @@ public class TaskPanel extends JPanel {
     JButton editTaskB = new JButton();
     JButton removeTaskB = new JButton();
     JButton completeTaskB = new JButton();
+    JButton newTTemplateB = new JButton();
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 		
@@ -77,7 +78,7 @@ public class TaskPanel extends JPanel {
         }
     }
     void jbInit() throws Exception {
-        tasksToolBar.setFloatable(false);
+        tasksToolBar.setFloatable(true);
 
         historyBackB.setAction(History.historyBackAction);
         historyBackB.setFocusable(false);
@@ -171,11 +172,30 @@ public class TaskPanel extends JPanel {
         });
         completeTaskB.setPreferredSize(new Dimension(24, 24));
         completeTaskB.setRequestFocusEnabled(false);
-        completeTaskB.setToolTipText(Local.getString("Complete task"));
+        completeTaskB.setToolTipText(Local.getString("Completed task"));
         completeTaskB.setMinimumSize(new Dimension(24, 24));
         completeTaskB.setMaximumSize(new Dimension(24, 24));
         completeTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_complete.png")));
+        
+        newTTemplateB.setBorderPainted(false);
+        newTTemplateB.setEnabled(true);
+        newTTemplateB.setFocusable(false);
+        newTTemplateB.addActionListener(new java.awt.event.ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e) 
+        	{
+        		newTTemplateB_actionPerformed(e);
+        	}
+        });
+        newTTemplateB.setPreferredSize(new Dimension(24, 24));
+        newTTemplateB.setRequestFocusEnabled(false);
+        newTTemplateB.setToolTipText(Local.getString("Create Task With Template"));
+        newTTemplateB.setMinimumSize(new Dimension(24, 24));
+        newTTemplateB.setMaximumSize(new Dimension(24, 24));
+        newTTemplateB.setIcon(
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
+        
 
 		// added by rawsushi
 //		showActiveOnly.setBorderPainted(false);
@@ -321,7 +341,10 @@ public class TaskPanel extends JPanel {
         tasksToolBar.add(removeTaskB, null);
         tasksToolBar.addSeparator(new Dimension(8, 24));
         tasksToolBar.add(editTaskB, null);
-        tasksToolBar.add(completeTaskB, null);
+        tasksToolBar.add(completeTaskB, null);        
+        tasksToolBar.addSeparator(new Dimension(8, 24));
+        tasksToolBar.add(newTTemplateB, null);
+
 
 		//tasksToolBar.add(showActiveOnly, null);
         
@@ -356,6 +379,7 @@ public class TaskPanel extends JPanel {
 				
 				ppCompleteTask.setEnabled(enbl);
 				completeTaskB.setEnabled(enbl);
+				
 				ppAddSubTask.setEnabled(enbl);
 				//ppSubTasks.setEnabled(enbl); // default value to be over-written later depending on whether it has sub tasks
 				ppCalcTask.setEnabled(enbl); // default value to be over-written later depending on whether it has sub tasks
@@ -386,6 +410,7 @@ public class TaskPanel extends JPanel {
         editTaskB.setEnabled(false);
         removeTaskB.setEnabled(false);
 		completeTaskB.setEnabled(false);
+		//newTTemplateB.setEnabled(false);
 		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
 		//ppParentTask.setEnabled(false);
@@ -488,6 +513,18 @@ public class TaskPanel extends JPanel {
         //taskTable.updateUI();
     }
 
+    void newTTemplateB_actionPerformed(ActionEvent e)
+    {
+        Dimension frmSize = App.getFrame().getSize();
+        Point loc = App.getFrame().getLocation();
+        
+    	//Create Template creator UI
+    	TaskTemplateDialogue tdlg = new TaskTemplateDialogue(App.getFrame(), Local.getString("Task Templates"));
+        tdlg.setLocation((frmSize.width - tdlg.getSize().width) / 2 + loc.x, (frmSize.height - tdlg.getSize().height) / 2 + loc.y);
+    	tdlg.setVisible(true);
+    	
+    }
+    
     void newTaskB_actionPerformed(ActionEvent e) {
         TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
         
