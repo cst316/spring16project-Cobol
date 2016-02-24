@@ -137,6 +137,16 @@ public class AppFrame extends JFrame {
                         p1Import_actionPerformed(e);
                 }
         };
+        
+        public Action generateReportAction = 
+        		new AbstractAction(Local.getString("Generate Report"))
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		generateReport_ButtonAction(e);
+        	}
+        	
+        };
     
     JMenuItem jMenuFileNewPrj = new JMenuItem();
         JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
@@ -148,7 +158,8 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuFileExportNote = new JMenuItem(
             workPanel.dailyItemsPanel.editorPanel.exportAction);
     JMenuItem jMenuFileMin = new JMenuItem(minimizeAction);
-
+    JMenuItem jMenuGenerateReport = new JMenuItem(generateReportAction);
+    
     JMenuItem jMenuItem1 = new JMenuItem();
     JMenuItem jMenuEditUndo = new JMenuItem(editor.undoAction);
     JMenuItem jMenuEditRedo = new JMenuItem(editor.redoAction);
@@ -340,6 +351,8 @@ public class AppFrame extends JFrame {
         jMenuFileMin.setText(Local.getString("Close the window"));
         jMenuFileMin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10,
                 InputEvent.ALT_MASK));
+        
+        jMenuGenerateReport.setText("Generate A Report");
 
         jMenuEdit.setText(Local.getString("Edit"));
 
@@ -455,6 +468,8 @@ public class AppFrame extends JFrame {
         jMenuFile.add(jMenuFileExportNote);
         jMenuFile.add(jMenuFileImportNote);
         jMenuFile.add(jMenuFileImportPrj);
+        jMenuFile.addSeparator();
+        jMenuFile.add(jMenuGenerateReport);
         jMenuFile.addSeparator();
         jMenuFile.add(jMenuEditPref);
         jMenuFile.addSeparator();
@@ -1103,5 +1118,17 @@ public class AppFrame extends JFrame {
                     exc.printStackTrace();
             }
         }
+            
+        protected void generateReport_ButtonAction(ActionEvent e)
+        {
+            Dimension frmSize = App.getFrame().getSize();
+            Point loc = App.getFrame().getLocation();
+            
+        	//Create Template creator UI
+        	ReportDialog tdlg = new ReportDialog(App.getFrame(), Local.getString("Generate Report"));
+            tdlg.setLocation((frmSize.width - tdlg.getSize().width) / 2 + loc.x, (frmSize.height - tdlg.getSize().height) / 2 + loc.y);
+        	tdlg.setVisible(true);
+        }
+       
 
 }
