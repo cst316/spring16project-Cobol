@@ -55,6 +55,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	BorderLayout borderLayout2 = new BorderLayout();
 	JPanel buttonsPanel = new JPanel();
 	JButton toggleButton = new JButton();
+	JButton generateReportButton = new JButton();
 	FlowLayout flowLayout1 = new FlowLayout();
 	Vector expListeners = new Vector();
 	boolean expanded = false;
@@ -122,6 +123,12 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 
 		toggleButton.setIcon(expIcon);
 		toggleButton.setMargin(new Insets(0, 0, 0, 0));
+		
+		generateReportButton.setMaximumSize(new Dimension(20, 20));
+		generateReportButton.setOpaque(false);
+		generateReportButton.setVerticalAlignment(SwingConstants.TOP);
+		generateReportButton.setIcon(expIcon);
+		
 		buttonsPanel.setMinimumSize(new Dimension(70, 22));
 		buttonsPanel.setOpaque(false);
 		buttonsPanel.setPreferredSize(new Dimension(80, 22));
@@ -228,6 +235,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 		topBar.add(toolbarPanel, null);
 		toolbarPanel.add(buttonsPanel, BorderLayout.EAST);
 		buttonsPanel.add(toggleButton, null);
+		buttonsPanel.add(generateReportButton, null);
 		toolbarPanel.add(curProjectTitle, BorderLayout.CENTER);
 		projectsPPMenu.add(ppOpenProject);
 		projectsPPMenu.addSeparator();
