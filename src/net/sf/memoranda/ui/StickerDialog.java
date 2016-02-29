@@ -333,8 +333,9 @@ public class StickerDialog extends JDialog {
                                   + DateFormat.getTimeInstance().format(
                                                                         new java.util.Date())+"\n"))
                                 + ImportSticker.fileContents.toString());
+            ImportSticker.name = null;
         }
-        ImportSticker.name = null;
+        
         return stickerText.getText();
     }
     public String getStickerTextSize() {

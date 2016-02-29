@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import net.sf.memoranda.EventsManager;
@@ -25,6 +26,7 @@ public class ImportSticker {
     static String name;
     static String fileContents;
     static String line;
+    static String dateCreated;
     File f1;
     
     public ImportSticker(String x) {
@@ -32,14 +34,19 @@ public class ImportSticker {
     }
     
     public boolean import_file() throws IOException{
-        System.out.println("got here.");
-        System.out.println(name);
+        //System.out.println("got here.");
+        //System.out.println(name);
         
+        
+        
+        /*
+         We are working on this =)
+         */
         File[] files = File.listRoots();
         for(File f : files){
             f.getPath();
-            System.out.println(f.getAbsolutePath());
-            f1 = new File(f.getPath()+name);
+            // System.out.println(f.getAbsolutePath());
+            f1 = new File(name);
             //System.out.println(f1.getParent());
             //DEBUG
             if (f1.getName().equalsIgnoreCase(name))
@@ -65,6 +72,12 @@ public class ImportSticker {
                     }
                 }
             }
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            /* debug
+             System.out.println("After Format : " + sdf.format(f1.lastModified()));
+             */
+            dateCreated = sdf.format(f1.lastModified());
             if (fileContents == null){
                 System.out.println("didn't find it");
                 JOptionPane.showMessageDialog(null,Local.getString("We cannot find your document"));
@@ -74,7 +87,8 @@ public class ImportSticker {
         }
         catch(IOException ex){
             JOptionPane.showMessageDialog(null,Local.getString("there was a problem finding your file"));
-            
+            name = null;
+            return false;
         }
         // }
         

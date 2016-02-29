@@ -208,26 +208,40 @@ public class AgendaPanel extends JPanel {
                         final JFrame parent = new JFrame();
                         String name = JOptionPane.showInputDialog(parent,Local.getString("Enter file name to import"),null);
                         try {
+                            //.import_file() looks for the file in the memorands folder
                             new ImportSticker(name).import_file();
+                            //creates a new sticker, but if the file isn't found it cancels it immediately
                             StickerDialog dlg = new StickerDialog(App.getFrame());
-                            Dimension frmSize = App.getFrame().getSize();
-                            dlg.setSize(new Dimension(300,380));
-                            Point loc = App.getFrame().getLocation();
-                            dlg.setLocation(
-                                            (frmSize.width - dlg.getSize().width) / 2 + loc.x,
-                                            (frmSize.height - dlg.getSize().height) / 2
-                                            + loc.y);
-                            dlg.setVisible(true);
-                            if (!dlg.CANCELLED) {
-                                String txt = dlg.getStickerText();
+                            if (ImportSticker.name == null){
+                                dlg.CANCELLED = true;
+                            }
+                            else {
+                                //allows the user, like always, to change text and font size
+                                Dimension frmSize = App.getFrame().getSize();
+                                dlg.setSize(new Dimension(300,380));
+                                Point loc = App.getFrame().getLocation();
+                                dlg.setLocation(
+                                                (frmSize.width - dlg.getSize().width) / 2 + loc.x,
+                                                (frmSize.height - dlg.getSize().height) / 2
+                                                + loc.y);
+                                dlg.setVisible(true);
+                                
+                                //gets the date andtext from the imported file
+                                String txt = "date file created: " + ImportSticker.dateCreated + "\n" + "date sticker created: " + dlg.getStickerText();
                                 int sP = dlg.getPriority();
+                                //formats the text to the correct color and font
                                 txt = txt.replaceAll("\\n", "<br>");
                                 txt = "<div style=\"background-color:"+dlg.getStickerColor()+";font-size:"+dlg.getStickerTextSize()+";color:"+dlg.getStickerTextColor()+"; \">"+txt+"</div>";
                                 EventsManager.createSticker(txt, sP);
                                 CurrentStorage.get().storeEventsManager();
+                                
                             }
+                            
                             refresh(CurrentDate.get());
-                            System.out.println("added your sticker");
+                            /*debug
+                             System.out.println("added your sticker");
+                             */
+                            //resets the import sticker, so it can be used again
                             ImportSticker.fileContents = null;
                         } catch (IOException ex) {
                             Logger.getLogger(AgendaPanel.class.getName()).log(Level.SEVERE, null, ex);
