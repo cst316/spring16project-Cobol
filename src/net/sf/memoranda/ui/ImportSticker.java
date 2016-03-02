@@ -20,7 +20,14 @@ import net.sf.memoranda.util.CurrentStorage;
 
 import net.sf.memoranda.util.Local;
 import nu.xom.Element;
-
+/*
+author: Micah Mehan
+Date merged: 29feb16
+group: team Cobol
+the purpose of this function is to import
+a sticker from a text file, contained inside 
+the memoranda folder
+*/
 public class ImportSticker {
     
     static String name;
@@ -57,10 +64,7 @@ public class ImportSticker {
         }
         try{
             FileReader fr = new FileReader(name);
-            BufferedReader br = new BufferedReader(fr);
-            
-            
-            
+            BufferedReader br = new BufferedReader(fr);   
             while ((line = br.readLine()) != null){
                 // System.out.println(line);
                 if(line != null){
