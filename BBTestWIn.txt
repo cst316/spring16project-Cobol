@@ -1,0 +1,1 @@
+This is a Black Box test of the import sticker functionality on a windows machine.

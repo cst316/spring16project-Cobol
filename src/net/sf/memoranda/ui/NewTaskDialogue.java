@@ -22,7 +22,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -43,15 +42,14 @@ import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
 import net.sf.memoranda.util.Local;
 
-public class TaskTemplateDialogue extends JDialog
+public class NewTaskDialogue extends JDialog
 {
 	JPanel mainPanel = new JPanel(new BorderLayout());
-	JButton standardTemplate_B = new JButton();
-	JButton newTemplate_B = new JButton();
+	JCheckBox CheckBox1 = new JCheckBox("Stuff");
 	
 	Border border1;
 	
-	public TaskTemplateDialogue(Frame frame, String title)
+	public NewTaskDialogue(Frame frame, String title)
 	{
 		super(frame, title, true);
 		ttInit();
@@ -63,33 +61,10 @@ public class TaskTemplateDialogue extends JDialog
 		this.setResizable(false);
 		this.setSize(new Dimension(1200, 800));
         border1 = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-        
-        //mainPanel.setBorder(border1);
-        
-        standardTemplate_B.setText("Standard Template");
-        standardTemplate_B.setMinimumSize(new Dimension(100, 26));
-        standardTemplate_B.setVisible(true);
-        standardTemplate_B.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	dispose();
-            	standardTemplate_B_Action(e);
-            }
-        });
+
         
         this.add(mainPanel, null);
         mainPanel.setBorder(border1);
-        mainPanel.add(standardTemplate_B, null);
-	}
-	
-	void standardTemplate_B_Action (ActionEvent e)
-	{
-		TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
-		
-		Dimension frmSize = App.getFrame().getSize();
-        Point loc = App.getFrame().getLocation();
-		dlg.startDate.getModel().setValue(CurrentDate.get().getDate());
-        dlg.endDate.getModel().setValue(CurrentDate.get().getDate());
-        dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
-        dlg.setVisible(true);
+        mainPanel.add(CheckBox1, null);
 	}
 }
