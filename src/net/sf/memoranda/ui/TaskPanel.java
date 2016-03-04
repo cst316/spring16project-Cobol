@@ -558,7 +558,7 @@ public class TaskPanel extends JPanel {
         Point loc = App.getFrame().getLocation();
         
     	//Create Template creator UI
-    	NewTemplate tdlg = new NewTemplate(App.getFrame(), Local.getString("we cannot let you create new templates yet."));
+    	NewTemplate tdlg = new NewTemplate(App.getFrame(), Local.getString("New Template Contents"));
         tdlg.setLocation((frmSize.width - tdlg.getSize().width) / 2 + loc.x, (frmSize.height - tdlg.getSize().height) / 2 + loc.y);
     	tdlg.setVisible(true);
     	

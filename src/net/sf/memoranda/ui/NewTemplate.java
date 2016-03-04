@@ -50,8 +50,11 @@ import net.sf.memoranda.util.Local;
  */
 public class NewTemplate extends JDialog{
     
-	JPanel mainPanel = new JPanel(new BorderLayout());
-        JButton newTemplate = new JButton();
+	JPanel mainPanel = new JPanel(new GridLayout(0,3));
+	JCheckBox option1 = new JCheckBox ("Start Date");
+	JCheckBox option2 = new JCheckBox ("End Date");
+	JCheckBox option3 = new JCheckBox ("Location Details");
+	JCheckBox option4 = new JCheckBox ("Reminders");
 	Border border1;
 	
 	public NewTemplate(Frame frame, String title)
@@ -68,19 +71,15 @@ public class NewTemplate extends JDialog{
         border1 = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         
         //mainPanel.setBorder(border1);
-        newTemplate.setText("can't do nothing");
-        newTemplate.setMinimumSize(new Dimension(100, 26));
-        newTemplate.setVisible(true);
+
         
-        newTemplate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	dispose();
-            }
-        });
-        
-        this.add(mainPanel, null);
+        //this.add(mainPanel, null);
         mainPanel.setBorder(border1);
-        mainPanel.add(newTemplate, null);
+        //mainPanel.add(newTemplate, null);
+        this.add(option1);
+        this.add(option2);
+        this.add(option3);
+        this.add(option4);
 	}
 	
 }
