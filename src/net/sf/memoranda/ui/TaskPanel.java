@@ -52,6 +52,7 @@ public class TaskPanel extends JPanel {
     JButton removeTaskB = new JButton();
     JButton completeTaskB = new JButton();
     JButton newTTemplateB = new JButton();
+    JButton newTemplate = new JButton();
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 		
@@ -115,6 +116,29 @@ public class TaskPanel extends JPanel {
             }
         });
         newTaskB.setBorderPainted(false);
+        //mmehan--start---------------------------------------------
+        newTemplate.setBorderPainted(false);
+        newTemplate.setEnabled(true);
+        newTemplate.setFocusable(false);
+        newTemplate.addActionListener(new java.awt.event.ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e) 
+        	{
+        		newTemplate_actionPerformed(e);
+        	}
+
+//            private void newTemplate_actionPerformed(ActionEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+        });
+        newTemplate.setPreferredSize(new Dimension(24, 24));
+        newTemplate.setRequestFocusEnabled(false);
+        newTemplate.setToolTipText(Local.getString("Create new Template"));
+        newTemplate.setMinimumSize(new Dimension(24, 24));
+        newTemplate.setMaximumSize(new Dimension(24, 24));
+        newTemplate.setIcon(
+            new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
+        //mmehan--end
         
         subTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
@@ -344,6 +368,8 @@ public class TaskPanel extends JPanel {
         tasksToolBar.add(completeTaskB, null);        
         tasksToolBar.addSeparator(new Dimension(8, 24));
         tasksToolBar.add(newTTemplateB, null);
+        tasksToolBar.addSeparator(new Dimension(8, 24));
+        tasksToolBar.add(newTemplate, null);
 
 
 		//tasksToolBar.add(showActiveOnly, null);
@@ -411,6 +437,7 @@ public class TaskPanel extends JPanel {
         removeTaskB.setEnabled(false);
 		completeTaskB.setEnabled(false);
 		//newTTemplateB.setEnabled(false);
+                newTemplate.setEnabled(true);
 		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
 		//ppParentTask.setEnabled(false);
@@ -525,6 +552,17 @@ public class TaskPanel extends JPanel {
     	
     }
     
+    void newTemplate_actionPerformed(ActionEvent e)
+    {
+        Dimension frmSize = App.getFrame().getSize();
+        Point loc = App.getFrame().getLocation();
+        
+    	//Create Template creator UI
+    	NewTemplate tdlg = new NewTemplate(App.getFrame(), Local.getString("we cannot let you create new templates yet."));
+        tdlg.setLocation((frmSize.width - tdlg.getSize().width) / 2 + loc.x, (frmSize.height - tdlg.getSize().height) / 2 + loc.y);
+    	tdlg.setVisible(true);
+    	
+    }
     void newTaskB_actionPerformed(ActionEvent e) {
         TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
         

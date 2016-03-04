@@ -32,6 +32,8 @@ import net.sf.memoranda.util.MimeTypesList;
 import net.sf.memoranda.util.Util;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*$Id: ResourcesPanel.java,v 1.13 2007/03/20 08:22:41 alexeya Exp $*/
 public class ResourcesPanel extends JPanel {
@@ -340,7 +342,7 @@ public class ResourcesPanel extends JPanel {
         }
     }
 
-    void runBrowser(String url) {
+    void runBrowser(String url) throws IOException {
         Util.runBrowser(url);
     }
 
@@ -352,7 +354,11 @@ public class ResourcesPanel extends JPanel {
                 if (path.length() >0)
                     runApp(path);
                 else
-                    runBrowser((String) resourcesTable.getValueAt(resourcesTable.getSelectedRow(), 0));
+                    try {
+                        runBrowser((String) resourcesTable.getValueAt(resourcesTable.getSelectedRow(), 0));
+                } catch (IOException ex) {
+                    Logger.getLogger(ResourcesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             //editTaskB_actionPerformed(null);
         }
@@ -381,7 +387,11 @@ public class ResourcesPanel extends JPanel {
                 if (path.length() >0)
                     runApp(path);
                 else
-                    runBrowser((String) resourcesTable.getValueAt(resourcesTable.getSelectedRow(), 0));
+                    try {
+                        runBrowser((String) resourcesTable.getValueAt(resourcesTable.getSelectedRow(), 0));
+    } catch (IOException ex) {
+        Logger.getLogger(ResourcesPanel.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
   void ppRemoveRes_actionPerformed(ActionEvent e) {
     removeResB_actionPerformed(e);
