@@ -11,10 +11,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -281,7 +284,11 @@ public class AppFrame extends JFrame {
                 "resources/icons/help.png")));
         jMenuHelpGuide.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                jMenuHelpGuide_actionPerformed(e);
+                try {
+                    jMenuHelpGuide_actionPerformed(e);
+                } catch (IOException ex) {
+                    Logger.getLogger(AppFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -290,14 +297,22 @@ public class AppFrame extends JFrame {
                 "resources/icons/web.png")));
         jMenuHelpWeb.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                jMenuHelpWeb_actionPerformed(e);
+                try {
+                    jMenuHelpWeb_actionPerformed(e);
+                } catch (IOException ex) {
+                    Logger.getLogger(AppFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
         jMenuHelpBug.setText(Local.getString("Report a bug"));
         jMenuHelpBug.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                jMenuHelpBug_actionPerformed(e);
+                try {
+                    jMenuHelpBug_actionPerformed(e);
+                } catch (IOException ex) {
+                    Logger.getLogger(AppFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });        
         
@@ -632,15 +647,15 @@ public class AppFrame extends JFrame {
 
     }
    
-    protected void jMenuHelpBug_actionPerformed(ActionEvent e) {
+    protected void jMenuHelpBug_actionPerformed(ActionEvent e) throws IOException {
         Util.runBrowser(App.BUGS_TRACKER_URL);
     }
    
-    protected void jMenuHelpWeb_actionPerformed(ActionEvent e) {
+    protected void jMenuHelpWeb_actionPerformed(ActionEvent e) throws IOException {
         Util.runBrowser(App.WEBSITE_URL);
     }
    
-    protected void jMenuHelpGuide_actionPerformed(ActionEvent e) {
+    protected void jMenuHelpGuide_actionPerformed(ActionEvent e) throws IOException {
         Util.runBrowser(App.GUIDE_URL);
     }
     
