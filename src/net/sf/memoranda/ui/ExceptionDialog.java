@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.memoranda.util.*;
 
 /*$Id: ExceptionDialog.java,v 1.2 2004/10/18 19:09:10 ivanrise Exp $*/
@@ -94,8 +96,17 @@ public class ExceptionDialog extends JDialog {
     reportB.setPreferredSize(new Dimension(120, 25));
     reportB.setText("Report bug...");
     reportB.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        reportB_actionPerformed(e);
+     //Updated upstream;
+     // public void actionPerformed(ActionEvent e){
+          
+     // }
+       public void actionPerformed(ActionEvent e) {
+          //Stashed changes
+          try {
+              reportB_actionPerformed(e);
+          } catch (IOException ex) {
+              Logger.getLogger(ExceptionDialog.class.getName()).log(Level.SEVERE, null, ex);
+          }
       }
     });
     closeB.setMaximumSize(new Dimension(120, 25));
@@ -153,7 +164,7 @@ public class ExceptionDialog extends JDialog {
     this.dispose();
   }
 
-  void reportB_actionPerformed(ActionEvent e) {
+  void reportB_actionPerformed(ActionEvent e) throws IOException {
       Util.runBrowser(App.BUGS_TRACKER_URL);
   }
 }
