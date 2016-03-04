@@ -96,7 +96,12 @@ public class ExceptionDialog extends JDialog {
     reportB.setPreferredSize(new Dimension(120, 25));
     reportB.setText("Report bug...");
     reportB.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(ActionEvent e){
+     //Updated upstream;
+     // public void actionPerformed(ActionEvent e){
+          
+     // }
+       public void actionPerformed(ActionEvent e) {
+          //Stashed changes
           try {
               reportB_actionPerformed(e);
           } catch (IOException ex) {
