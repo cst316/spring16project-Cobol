@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -47,6 +48,7 @@ public class TaskTemplateDialogue extends JDialog
 	JPanel mainPanel = new JPanel(new BorderLayout());
 	JButton standardTemplate_B = new JButton();
 	JButton newTemplate_B = new JButton();
+	
 	Border border1;
 	
 	public TaskTemplateDialogue(Frame frame, String title)
