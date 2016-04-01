@@ -550,6 +550,12 @@ public class TaskPanel extends JPanel {
         tdlg.setLocation((frmSize.width - tdlg.getSize().width) / 2 + loc.x, (frmSize.height - tdlg.getSize().height) / 2 + loc.y);
     	tdlg.setVisible(true);
     	
+        taskTable.tableChanged();
+        parentPanel.updateIndicators();
+    	//if (tdlg != null)
+    	//TaskTemplate tTemp = tdlg.getTaskTemplate();
+    	
+    	
     }
     
     void newTemplate_actionPerformed(ActionEvent e)
