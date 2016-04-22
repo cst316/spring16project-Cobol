@@ -18,5 +18,7 @@ public interface TaskTemplate
 	
 	
 	public Task createTask();
+	
+	
 		
 }
