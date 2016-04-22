@@ -64,14 +64,16 @@ public class TaskTemplateDialogue extends JDialog
 	void ttInit()
 	{
 		this.setResizable(true);
-		this.setSize(new Dimension(1400, 800));
+		this.setSize(new Dimension(700, 400));
+        this.setLayout(new GridBagLayout());
         border1 = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         
         //mainPanel.setBorder(border1);
         
-        standardTemplate_B.setText("Test Template");
+        standardTemplate_B.setText("Standard Template");
         //standardTemplate_B.setMinimumSize(new Dimension(100, 26));
         standardTemplate_B.setVisible(true);
+        standardTemplate_B.setBounds(10,10,40,40);
         standardTemplate_B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	//dispose();
@@ -80,8 +82,9 @@ public class TaskTemplateDialogue extends JDialog
         });
         
         cancelButton.setText("Cancel");
-        //cancelButton.setMinimumSize(new Dimension(50, 26));
+        cancelButton.setMinimumSize(new Dimension(50, 26));
         cancelButton.setVisible(true);
+        cancelButton.setBounds(10,10,500,500);
         cancelButton.addActionListener(new java.awt.event.ActionListener(){
         	public void actionPerformed(ActionEvent e)
         	{
@@ -89,18 +92,22 @@ public class TaskTemplateDialogue extends JDialog
         	}
         });
         
-        this.add(mainPanel, null);
         mainPanel.setBorder(border1);
-        mainPanel.add(standardTemplate_B);
-        mainPanel.add(cancelButton);
-        standardTemplate_B.setBounds(10,10,40,40);
-        cancelButton.setBounds(10,10,40,40);
+        this.add(standardTemplate_B);
+        this.add(cancelButton);
+        mainPanel.setVisible(true);
+        //this.add(mainPanel, null);
+        //this.setVisible(true);
 	}
 	
 	void standardTemplate_B_Action (ActionEvent e)
 	{
 		CurrentTaskTemplate = new TaskTemplateImpl(0);
 		CurrentTaskTemplate.createTask();
+		//BlackBox Testing
+		BBTemplateTest();
+		//WhiteBox Testing
+		WBTemplateTest();
 		CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
 		dispose();
 	}
@@ -109,4 +116,31 @@ public class TaskTemplateDialogue extends JDialog
 	{
 		dispose();
 	}
+	
+	//BlackBox Testing
+	void BBTemplateTest()
+	{
+		if(CurrentProject.getTaskList().getTask("This is Standard Template Task") != null)
+		{
+			System.out.println("Passed");
+		}
+		else
+		{
+			System.out.println("Failed");
+		}
+	}
+
+	void WBTemplateTest()
+	{
+		CurrentTaskTemplate = new TaskTemplateImpl(0);
+		CurrentTaskTemplate.createTask();
+		
+		CurrentTaskTemplate = new TaskTemplateImpl(1);
+		CurrentTaskTemplate.createTask();
+		
+		CurrentTaskTemplate = new TaskTemplateImpl(-1);
+		CurrentTaskTemplate.createTask();
+	
+	}
 }
+

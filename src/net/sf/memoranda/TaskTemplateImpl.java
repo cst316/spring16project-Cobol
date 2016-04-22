@@ -38,11 +38,19 @@ public class TaskTemplateImpl implements TaskTemplate
 			
 			priorityToSet = 0;
 			
-			textToSet = "This is Test Template Task";
+			textToSet = "This is Standard Template Task";
 			
 			effortToSet = 0;
 			
-			descriptionToSet = "This is Test Template";
+			descriptionToSet = "This is Standard Template";
+		}
+		else if(autoFillNum < 0)
+		{
+			// Add more variety
+		}
+		else
+		{
+			System.out.println("Invalid AutoFillNum");
 		}
 	}
 	
